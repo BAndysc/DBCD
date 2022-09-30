@@ -1,6 +1,7 @@
 using DBCD.Providers;
 using DBCD.IO;
 using System;
+using System.IO;
 
 namespace DBCD
 {
@@ -15,9 +16,8 @@ namespace DBCD
             this.dbdProvider = dbdProvider;
         }
 
-        public IDBCDStorage Load(string tableName, string build = null, Locale locale = Locale.None)
+        public IDBCDStorage Load(Stream dbcStream, string tableName, string build = null, Locale locale = Locale.None)
         {
-            var dbcStream = this.dbcProvider.StreamForTableName(tableName, build);
             var dbdStream = this.dbdProvider.StreamForTableName(tableName, build);
 
             var builder = new DBCDBuilder(locale);
